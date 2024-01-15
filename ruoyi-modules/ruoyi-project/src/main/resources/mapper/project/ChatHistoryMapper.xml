@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.mapper.ChatHistoryMapper">
+    
+    <resultMap type="ChatHistory" id="ChatHistoryResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="receiveId"    column="receive_id"    />
+        <result property="chatContent"    column="chat_content"    />
+        <result property="chatTime"    column="chat_time"    />
+        <result property="readStatus"    column="read_status"    />
+        <result property="readTime"    column="read_time"    />
+        <result property="note1"    column="note1"    />
+        <result property="note2"    column="note2"    />
+        <result property="note3"    column="note3"    />
+        <result property="note4"    column="note4"    />
+        <result property="note5"    column="note5"    />
+    </resultMap>
+
+    <sql id="selectChatHistoryVo">
+        select id, user_id, receive_id, chat_content, chat_time, read_status, read_time, note1, note2, note3, note4, note5 from chat_history
+    </sql>
+
+    <select id="selectChatHistoryListTwoUser" parameterType="ChatHistory" resultMap="ChatHistoryResult">
+        <include refid="selectChatHistoryVo"/>
+        <where>
+            <if test="userId != null and receiveId != null and userId != '' and receiveId != ''"> (user_id = #{userId} and receive_id = #{receiveId}) or (user_id = #{receiveId} and receive_id = #{userId})</if>
+        </where>
+    </select>
+
+    <select id="selectChatHistoryListTwoUserByDesc" parameterType="ChatHistory" resultMap="ChatHistoryResult">
+        <include refid="selectChatHistoryVo"/>
+        <where>
+            <if test="userId != null and receiveId != null and userId != '' and receiveId != ''"> (user_id = #{userId} and receive_id = #{receiveId}) or (user_id = #{receiveId} and receive_id = #{userId})</if>
+        </where>
+        order by id desc
+    </select>
+        
+    <insert id="insertChatHistory" parameterType="ChatHistory" useGeneratedKeys="true" keyProperty="id">
+        insert into chat_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="receiveId != null">receive_id,</if>
+            <if test="chatContent != null">chat_content,</if>
+            <if test="chatTime != null">chat_time,</if>
+            <if test="readStatus != null">read_status,</if>
+            <if test="readTime != null">read_time,</if>
+            <if test="note1 != null">note1,</if>
+            <if test="note2 != null">note2,</if>
+            <if test="note3 != null">note3,</if>
+            <if test="note4 != null">note4,</if>
+            <if test="note5 != null">note5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="receiveId != null">#{receiveId},</if>
+            <if test="chatContent != null">#{chatContent},</if>
+            <if test="chatTime != null">#{chatTime},</if>
+            <if test="readStatus != null">#{readStatus},</if>
+            <if test="readTime != null">#{readTime},</if>
+            <if test="note1 != null">#{note1},</if>
+            <if test="note2 != null">#{note2},</if>
+            <if test="note3 != null">#{note3},</if>
+            <if test="note4 != null">#{note4},</if>
+            <if test="note5 != null">#{note5},</if>
+         </trim>
+    </insert>
+</mapper>

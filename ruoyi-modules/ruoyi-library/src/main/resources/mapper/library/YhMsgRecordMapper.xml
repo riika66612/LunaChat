@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.library.msg.mssage.mapper.YhMsgRecordMapper">
+    
+    <resultMap type="YhMsgRecord" id="YhMsgRecordResult">
+        <result property="id"    column="ID"    />
+        <result property="msgInnerId"    column="MSG_INNER_ID"    />
+        <result property="receiveUserCode"    column="RECEIVE_USER_CODE"    />
+        <result property="receiveUserName"    column="RECEIVE_USER_NAME"    />
+        <result property="readStatus"    column="READ_STATUS"    />
+        <result property="readDate"    column="READ_DATE"    />
+        <result property="isStar"    column="IS_STAR"    />
+        <result property="createBy"    column="CREATE_BY"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateBy"    column="UPDATE_BY"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+        <result property="remark"    column="REMARK"    />
+        <result property="note1"    column="NOTE1"    />
+        <result property="note2"    column="NOTE2"    />
+        <result property="note3"    column="NOTE3"    />
+        <result property="note4"    column="NOTE4"    />
+        <result property="note5"    column="NOTE5"    />
+        <result property="note6"    column="NOTE6"    />
+        <result property="note7"    column="NOTE7"    />
+        <result property="note8"    column="NOTE8"    />
+        <result property="note9"    column="NOTE9"    />
+        <result property="note10"    column="NOTE10"    />
+    </resultMap>
+
+    <sql id="selectYhMsgRecordVo">
+        select ID, MSG_INNER_ID, RECEIVE_USER_CODE, RECEIVE_USER_NAME, READ_STATUS, READ_DATE, IS_STAR, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, REMARK, NOTE1, NOTE2, NOTE3, NOTE4, NOTE5, NOTE6, NOTE7, NOTE8, NOTE9, NOTE10 from yh_msg_record
+    </sql>
+
+    <select id="selectYhMsgRecordList" parameterType="YhMsgRecord" resultMap="YhMsgRecordResult">
+        <include refid="selectYhMsgRecordVo"/>
+        <where>  
+            <if test="msgInnerId != null  and msgInnerId != ''"> and MSG_INNER_ID = #{msgInnerId}</if>
+            <if test="receiveUserCode != null  and receiveUserCode != ''"> and RECEIVE_USER_CODE = #{receiveUserCode}</if>
+            <if test="receiveUserName != null  and receiveUserName != ''"> and RECEIVE_USER_NAME like concat('%', #{receiveUserName}, '%')</if>
+            <if test="readStatus != null  and readStatus != ''"> and READ_STATUS = #{readStatus}</if>
+            <if test="readDate != null "> and READ_DATE = #{readDate}</if>
+            <if test="isStar != null  and isStar != ''"> and IS_STAR = #{isStar}</if>
+            <if test="createBy != null  and createBy != ''"> and CREATE_BY = #{createBy}</if>
+            <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+            <if test="updateBy != null  and updateBy != ''"> and UPDATE_BY = #{updateBy}</if>
+            <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+            <if test="remark != null  and remark != ''"> and REMARK = #{remark}</if>
+            <if test="note1 != null  and note1 != ''"> and NOTE1 = #{note1}</if>
+            <if test="note2 != null  and note2 != ''"> and NOTE2 = #{note2}</if>
+            <if test="note3 != null  and note3 != ''"> and NOTE3 = #{note3}</if>
+            <if test="note4 != null  and note4 != ''"> and NOTE4 = #{note4}</if>
+            <if test="note5 != null  and note5 != ''"> and NOTE5 = #{note5}</if>
+            <if test="note6 != null  and note6 != ''"> and NOTE6 = #{note6}</if>
+            <if test="note7 != null  and note7 != ''"> and NOTE7 = #{note7}</if>
+            <if test="note8 != null  and note8 != ''"> and NOTE8 = #{note8}</if>
+            <if test="note9 != null  and note9 != ''"> and NOTE9 = #{note9}</if>
+            <if test="note10 != null  and note10 != ''"> and NOTE10 = #{note10}</if>
+        </where>
+    </select>
+    
+    <select id="selectYhMsgRecordById" parameterType="Long" resultMap="YhMsgRecordResult">
+        <include refid="selectYhMsgRecordVo"/>
+        where ID = #{id}
+    </select>
+        
+    <insert id="insertYhMsgRecord" parameterType="YhMsgRecord" useGeneratedKeys="true" keyProperty="id">
+        insert into yh_msg_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="msgInnerId != null">MSG_INNER_ID,</if>
+            <if test="receiveUserCode != null">RECEIVE_USER_CODE,</if>
+            <if test="receiveUserName != null">RECEIVE_USER_NAME,</if>
+            <if test="readStatus != null">READ_STATUS,</if>
+            <if test="readDate != null">READ_DATE,</if>
+            <if test="isStar != null">IS_STAR,</if>
+            <if test="createBy != null">CREATE_BY,</if>
+            <if test="createTime != null">CREATE_TIME,</if>
+            <if test="updateBy != null">UPDATE_BY,</if>
+            <if test="updateTime != null">UPDATE_TIME,</if>
+            <if test="remark != null">REMARK,</if>
+            <if test="note1 != null">NOTE1,</if>
+            <if test="note2 != null">NOTE2,</if>
+            <if test="note3 != null">NOTE3,</if>
+            <if test="note4 != null">NOTE4,</if>
+            <if test="note5 != null">NOTE5,</if>
+            <if test="note6 != null">NOTE6,</if>
+            <if test="note7 != null">NOTE7,</if>
+            <if test="note8 != null">NOTE8,</if>
+            <if test="note9 != null">NOTE9,</if>
+            <if test="note10 != null">NOTE10,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="msgInnerId != null">#{msgInnerId},</if>
+            <if test="receiveUserCode != null">#{receiveUserCode},</if>
+            <if test="receiveUserName != null">#{receiveUserName},</if>
+            <if test="readStatus != null">#{readStatus},</if>
+            <if test="readDate != null">#{readDate},</if>
+            <if test="isStar != null">#{isStar},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="note1 != null">#{note1},</if>
+            <if test="note2 != null">#{note2},</if>
+            <if test="note3 != null">#{note3},</if>
+            <if test="note4 != null">#{note4},</if>
+            <if test="note5 != null">#{note5},</if>
+            <if test="note6 != null">#{note6},</if>
+            <if test="note7 != null">#{note7},</if>
+            <if test="note8 != null">#{note8},</if>
+            <if test="note9 != null">#{note9},</if>
+            <if test="note10 != null">#{note10},</if>
+         </trim>
+    </insert>
+
+    <update id="updateYhMsgRecord" parameterType="YhMsgRecord">
+        update yh_msg_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="msgInnerId != null">MSG_INNER_ID = #{msgInnerId},</if>
+            <if test="receiveUserCode != null">RECEIVE_USER_CODE = #{receiveUserCode},</if>
+            <if test="receiveUserName != null">RECEIVE_USER_NAME = #{receiveUserName},</if>
+            <if test="readStatus != null">READ_STATUS = #{readStatus},</if>
+            <if test="readDate != null">READ_DATE = #{readDate},</if>
+            <if test="isStar != null">IS_STAR = #{isStar},</if>
+            <if test="createBy != null">CREATE_BY = #{createBy},</if>
+            <if test="createTime != null">CREATE_TIME = #{createTime},</if>
+            <if test="updateBy != null">UPDATE_BY = #{updateBy},</if>
+            <if test="updateTime != null">UPDATE_TIME = #{updateTime},</if>
+            <if test="remark != null">REMARK = #{remark},</if>
+            <if test="note1 != null">NOTE1 = #{note1},</if>
+            <if test="note2 != null">NOTE2 = #{note2},</if>
+            <if test="note3 != null">NOTE3 = #{note3},</if>
+            <if test="note4 != null">NOTE4 = #{note4},</if>
+            <if test="note5 != null">NOTE5 = #{note5},</if>
+            <if test="note6 != null">NOTE6 = #{note6},</if>
+            <if test="note7 != null">NOTE7 = #{note7},</if>
+            <if test="note8 != null">NOTE8 = #{note8},</if>
+            <if test="note9 != null">NOTE9 = #{note9},</if>
+            <if test="note10 != null">NOTE10 = #{note10},</if>
+        </trim>
+        where ID = #{id}
+    </update>
+
+    <delete id="deleteYhMsgRecordById" parameterType="Long">
+        delete from yh_msg_record where ID = #{id}
+    </delete>
+
+    <delete id="deleteYhMsgRecordByIds" parameterType="String">
+        delete from yh_msg_record where ID in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

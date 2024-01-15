@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.library.msg.mssage.mapper.YhMsgInnerMapper">
+    
+    <resultMap type="YhMsgInner" id="YhMsgInnerResult">
+        <result property="id"    column="ID"    />
+        <result property="msgTitle"    column="MSG_TITLE"    />
+        <result property="contentLevel"    column="CONTENT_LEVEL"    />
+        <result property="contentType"    column="CONTENT_TYPE"    />
+        <result property="msgContent"    column="MSG_CONTENT"    />
+        <result property="receiveType"    column="RECEIVE_TYPE"    />
+        <result property="receiveCodes"    column="RECEIVE_CODES"    />
+        <result property="receiveNames"    column="RECEIVE_NAMES"    />
+        <result property="sendUserCode"    column="SEND_USER_CODE"    />
+        <result property="sendUserName"    column="SEND_USER_NAME"    />
+        <result property="sendDate"    column="SEND_DATE"    />
+        <result property="isAttac"    column="IS_ATTAC"    />
+        <result property="notifyTypes"    column="NOTIFY_TYPES"    />
+        <result property="status"    column="STATUS"    />
+        <result property="createBy"    column="CREATE_BY"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateBy"    column="UPDATE_BY"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+        <result property="remark"    column="REMARK"    />
+        <result property="note1"    column="NOTE1"    />
+        <result property="note2"    column="NOTE2"    />
+        <result property="note3"    column="NOTE3"    />
+        <result property="note4"    column="NOTE4"    />
+        <result property="note5"    column="NOTE5"    />
+        <result property="note6"    column="NOTE6"    />
+        <result property="note7"    column="NOTE7"    />
+        <result property="note8"    column="NOTE8"    />
+        <result property="note9"    column="NOTE9"    />
+        <result property="note10"    column="NOTE10"    />
+    </resultMap>
+
+    <sql id="selectYhMsgInnerVo">
+        select ID, MSG_TITLE, CONTENT_LEVEL, CONTENT_TYPE, MSG_CONTENT, RECEIVE_TYPE, RECEIVE_CODES, RECEIVE_NAMES, SEND_USER_CODE, SEND_USER_NAME, SEND_DATE, IS_ATTAC, NOTIFY_TYPES, STATUS, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, REMARK, NOTE1, NOTE2, NOTE3, NOTE4, NOTE5, NOTE6, NOTE7, NOTE8, NOTE9, NOTE10 from yh_msg_inner
+    </sql>
+
+    <select id="selectYhMsgInnerList" parameterType="YhMsgInner" resultMap="YhMsgInnerResult">
+        <include refid="selectYhMsgInnerVo"/>
+        <where>  
+            <if test="msgTitle != null  and msgTitle != ''"> and MSG_TITLE = #{msgTitle}</if>
+            <if test="contentLevel != null  and contentLevel != ''"> and CONTENT_LEVEL = #{contentLevel}</if>
+            <if test="contentType != null  and contentType != ''"> and CONTENT_TYPE = #{contentType}</if>
+            <if test="msgContent != null  and msgContent != ''"> and MSG_CONTENT = #{msgContent}</if>
+            <if test="receiveType != null  and receiveType != ''"> and RECEIVE_TYPE = #{receiveType}</if>
+            <if test="receiveCodes != null  and receiveCodes != ''"> and RECEIVE_CODES = #{receiveCodes}</if>
+            <if test="receiveNames != null  and receiveNames != ''"> and RECEIVE_NAMES = #{receiveNames}</if>
+            <if test="sendUserCode != null  and sendUserCode != ''"> and SEND_USER_CODE = #{sendUserCode}</if>
+            <if test="sendUserName != null  and sendUserName != ''"> and SEND_USER_NAME like concat('%', #{sendUserName}, '%')</if>
+            <if test="sendDate != null "> and SEND_DATE = #{sendDate}</if>
+            <if test="isAttac != null  and isAttac != ''"> and IS_ATTAC = #{isAttac}</if>
+            <if test="notifyTypes != null  and notifyTypes != ''"> and NOTIFY_TYPES = #{notifyTypes}</if>
+            <if test="status != null  and status != ''"> and STATUS = #{status}</if>
+            <if test="createBy != null  and createBy != ''"> and CREATE_BY = #{createBy}</if>
+            <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+            <if test="updateBy != null  and updateBy != ''"> and UPDATE_BY = #{updateBy}</if>
+            <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+            <if test="remark != null  and remark != ''"> and REMARK = #{remark}</if>
+            <if test="note1 != null  and note1 != ''"> and NOTE1 = #{note1}</if>
+            <if test="note2 != null  and note2 != ''"> and NOTE2 = #{note2}</if>
+            <if test="note3 != null  and note3 != ''"> and NOTE3 = #{note3}</if>
+            <if test="note4 != null  and note4 != ''"> and NOTE4 = #{note4}</if>
+            <if test="note5 != null  and note5 != ''"> and NOTE5 = #{note5}</if>
+            <if test="note6 != null  and note6 != ''"> and NOTE6 = #{note6}</if>
+            <if test="note7 != null  and note7 != ''"> and NOTE7 = #{note7}</if>
+            <if test="note8 != null  and note8 != ''"> and NOTE8 = #{note8}</if>
+            <if test="note9 != null  and note9 != ''"> and NOTE9 = #{note9}</if>
+            <if test="note10 != null  and note10 != ''"> and NOTE10 = #{note10}</if>
+        </where>
+    </select>
+    
+    <select id="selectYhMsgInnerById" parameterType="Long" resultMap="YhMsgInnerResult">
+        <include refid="selectYhMsgInnerVo"/>
+        where ID = #{id}
+    </select>
+        
+    <insert id="insertYhMsgInner" parameterType="YhMsgInner" useGeneratedKeys="true" keyProperty="id">
+        insert into yh_msg_inner
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="msgTitle != null">MSG_TITLE,</if>
+            <if test="contentLevel != null">CONTENT_LEVEL,</if>
+            <if test="contentType != null">CONTENT_TYPE,</if>
+            <if test="msgContent != null">MSG_CONTENT,</if>
+            <if test="receiveType != null">RECEIVE_TYPE,</if>
+            <if test="receiveCodes != null">RECEIVE_CODES,</if>
+            <if test="receiveNames != null">RECEIVE_NAMES,</if>
+            <if test="sendUserCode != null">SEND_USER_CODE,</if>
+            <if test="sendUserName != null">SEND_USER_NAME,</if>
+            <if test="sendDate != null">SEND_DATE,</if>
+            <if test="isAttac != null">IS_ATTAC,</if>
+            <if test="notifyTypes != null">NOTIFY_TYPES,</if>
+            <if test="status != null">STATUS,</if>
+            <if test="createBy != null">CREATE_BY,</if>
+            <if test="createTime != null">CREATE_TIME,</if>
+            <if test="updateBy != null">UPDATE_BY,</if>
+            <if test="updateTime != null">UPDATE_TIME,</if>
+            <if test="remark != null">REMARK,</if>
+            <if test="note1 != null">NOTE1,</if>
+            <if test="note2 != null">NOTE2,</if>
+            <if test="note3 != null">NOTE3,</if>
+            <if test="note4 != null">NOTE4,</if>
+            <if test="note5 != null">NOTE5,</if>
+            <if test="note6 != null">NOTE6,</if>
+            <if test="note7 != null">NOTE7,</if>
+            <if test="note8 != null">NOTE8,</if>
+            <if test="note9 != null">NOTE9,</if>
+            <if test="note10 != null">NOTE10,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="msgTitle != null">#{msgTitle},</if>
+            <if test="contentLevel != null">#{contentLevel},</if>
+            <if test="contentType != null">#{contentType},</if>
+            <if test="msgContent != null">#{msgContent},</if>
+            <if test="receiveType != null">#{receiveType},</if>
+            <if test="receiveCodes != null">#{receiveCodes},</if>
+            <if test="receiveNames != null">#{receiveNames},</if>
+            <if test="sendUserCode != null">#{sendUserCode},</if>
+            <if test="sendUserName != null">#{sendUserName},</if>
+            <if test="sendDate != null">#{sendDate},</if>
+            <if test="isAttac != null">#{isAttac},</if>
+            <if test="notifyTypes != null">#{notifyTypes},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="note1 != null">#{note1},</if>
+            <if test="note2 != null">#{note2},</if>
+            <if test="note3 != null">#{note3},</if>
+            <if test="note4 != null">#{note4},</if>
+            <if test="note5 != null">#{note5},</if>
+            <if test="note6 != null">#{note6},</if>
+            <if test="note7 != null">#{note7},</if>
+            <if test="note8 != null">#{note8},</if>
+            <if test="note9 != null">#{note9},</if>
+            <if test="note10 != null">#{note10},</if>
+         </trim>
+    </insert>
+
+    <update id="updateYhMsgInner" parameterType="YhMsgInner">
+        update yh_msg_inner
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="msgTitle != null">MSG_TITLE = #{msgTitle},</if>
+            <if test="contentLevel != null">CONTENT_LEVEL = #{contentLevel},</if>
+            <if test="contentType != null">CONTENT_TYPE = #{contentType},</if>
+            <if test="msgContent != null">MSG_CONTENT = #{msgContent},</if>
+            <if test="receiveType != null">RECEIVE_TYPE = #{receiveType},</if>
+            <if test="receiveCodes != null">RECEIVE_CODES = #{receiveCodes},</if>
+            <if test="receiveNames != null">RECEIVE_NAMES = #{receiveNames},</if>
+            <if test="sendUserCode != null">SEND_USER_CODE = #{sendUserCode},</if>
+            <if test="sendUserName != null">SEND_USER_NAME = #{sendUserName},</if>
+            <if test="sendDate != null">SEND_DATE = #{sendDate},</if>
+            <if test="isAttac != null">IS_ATTAC = #{isAttac},</if>
+            <if test="notifyTypes != null">NOTIFY_TYPES = #{notifyTypes},</if>
+            <if test="status != null">STATUS = #{status},</if>
+            <if test="createBy != null">CREATE_BY = #{createBy},</if>
+            <if test="createTime != null">CREATE_TIME = #{createTime},</if>
+            <if test="updateBy != null">UPDATE_BY = #{updateBy},</if>
+            <if test="updateTime != null">UPDATE_TIME = #{updateTime},</if>
+            <if test="remark != null">REMARK = #{remark},</if>
+            <if test="note1 != null">NOTE1 = #{note1},</if>
+            <if test="note2 != null">NOTE2 = #{note2},</if>
+            <if test="note3 != null">NOTE3 = #{note3},</if>
+            <if test="note4 != null">NOTE4 = #{note4},</if>
+            <if test="note5 != null">NOTE5 = #{note5},</if>
+            <if test="note6 != null">NOTE6 = #{note6},</if>
+            <if test="note7 != null">NOTE7 = #{note7},</if>
+            <if test="note8 != null">NOTE8 = #{note8},</if>
+            <if test="note9 != null">NOTE9 = #{note9},</if>
+            <if test="note10 != null">NOTE10 = #{note10},</if>
+        </trim>
+        where ID = #{id}
+    </update>
+
+    <delete id="deleteYhMsgInnerById" parameterType="Long">
+        delete from yh_msg_inner where ID = #{id}
+    </delete>
+
+    <delete id="deleteYhMsgInnerByIds" parameterType="String">
+        delete from yh_msg_inner where ID in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.library.msg.mssage.mapper.MsgMapper">
+    
+    <resultMap type="MsgDomain" id="MsgResult">
+        <result property="id"    column="ID"    />
+        <result property="msgTitle"    column="MSG_TITLE"    />
+        <result property="contentLevel"    column="CONTENT_LEVEL"    />
+        <result property="contentType"    column="CONTENT_TYPE"    />
+        <result property="msgContent"    column="MSG_CONTENT"    />
+        <result property="receiveType"    column="RECEIVE_TYPE"    />
+        <result property="receiveCodes"    column="RECEIVE_CODES"    />
+        <result property="receiveNames"    column="RECEIVE_NAMES"    />
+        <result property="sendUserCode"    column="SEND_USER_CODE"    />
+        <result property="sendUserName"    column="SEND_USER_NAME"    />
+        <result property="sendDate"    column="SEND_DATE"    />
+        <result property="isAttac"    column="IS_ATTAC"    />
+        <result property="notifyTypes"    column="NOTIFY_TYPES"    />
+        <result property="status"    column="STATUS"    />
+        <result property="createBy"    column="CREATE_BY"    />
+        <result property="createTime"    column="CREATE_TIME"    />
+        <result property="updateBy"    column="UPDATE_BY"    />
+        <result property="updateTime"    column="UPDATE_TIME"    />
+        <result property="note"    column="NOTE"    />
+        <!-- 以下从record表里加入 -->
+        <result property="receiveUserCode"    column="RECEIVE_USER_CODE"    />
+        <result property="receiveUserName"    column="RECEIVE_USER_NAME"    />
+        <result property="readStatus"    column="READ_STATUS"    />
+        <result property="readDate"    column="READ_DATE"    />
+        <result property="isStar"    column="IS_STAR"    />
+        <!-- 以上从record表里加入 -->
+        <result property="note1"    column="NOTE1"    />
+        <result property="note2"    column="NOTE2"    />
+        <result property="note3"    column="NOTE3"    />
+        <result property="note4"    column="NOTE4"    />
+        <result property="note5"    column="NOTE5"    />
+        <result property="note6"    column="NOTE6"    />
+        <result property="note7"    column="NOTE7"    />
+        <result property="note8"    column="NOTE8"    />
+        <result property="note9"    column="NOTE9"    />
+        <result property="note10"    column="NOTE10"    />
+    </resultMap>
+
+    <sql id="selectMsgVo">
+        select ID, MSG_TITLE, CONTENT_LEVEL, CONTENT_TYPE, MSG_CONTENT, RECEIVE_TYPE, RECEIVE_CODES, RECEIVE_NAMES, SEND_USER_CODE, SEND_USER_NAME, SEND_DATE, IS_ATTAC, NOTIFY_TYPES, STATUS, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, NOTE, NOTE1, NOTE2, NOTE3, NOTE4, NOTE5, NOTE6, NOTE7, NOTE8, NOTE9, NOTE10, RECEIVE_USER_CODE, RECEIVE_USER_NAME, IF(READ_STATUS='1', '已读', '未读') READ_STATUS, READ_DATE, IS_STAR
+        from (select r.ID, i.MSG_TITLE, i.CONTENT_LEVEL, i.CONTENT_TYPE, i.MSG_CONTENT, i.RECEIVE_TYPE, i.RECEIVE_CODES, i.RECEIVE_NAMES, i.SEND_USER_CODE, i.SEND_USER_NAME, i.SEND_DATE, i.IS_ATTAC, i.NOTIFY_TYPES, i.STATUS, i.CREATE_BY, i.CREATE_TIME, i.UPDATE_BY, i.UPDATE_TIME, i.NOTE, i.NOTE1, i.NOTE2, i.NOTE3, i.NOTE4, i.NOTE5, i.NOTE6, i.NOTE7, i.NOTE8, i.NOTE9, i.NOTE10, r.RECEIVE_USER_CODE, r.RECEIVE_USER_NAME, r.READ_STATUS, r.READ_DATE, r.IS_STAR
+                from yh_msg_record r
+                left join yh_msg_inner i
+                on i.ID=r.MSG_INNER_ID
+                order by READ_STATUS, SEND_DATE) m
+    </sql>
+
+    <select id="selectMsgList" parameterType="MsgDomain" resultMap="MsgResult">
+        <include refid="selectMsgVo"/>
+        <where>  
+            <if test="msgTitle != null  and msgTitle != ''"> and MSG_TITLE = #{msgTitle}</if>
+            <if test="contentLevel != null  and contentLevel != ''"> and CONTENT_LEVEL = #{contentLevel}</if>
+            <if test="contentType != null  and contentType != ''"> and CONTENT_TYPE = #{contentType}</if>
+            <if test="msgContent != null  and msgContent != ''"> and MSG_CONTENT = #{msgContent}</if>
+            <if test="receiveType != null  and receiveType != ''"> and RECEIVE_TYPE = #{receiveType}</if>
+            <if test="receiveCodes != null  and receiveCodes != ''"> and RECEIVE_CODES = #{receiveCodes}</if>
+            <if test="receiveNames != null  and receiveNames != ''"> and RECEIVE_NAMES = #{receiveNames}</if>
+            <if test="sendUserCode != null  and sendUserCode != ''"> and SEND_USER_CODE = #{sendUserCode}</if>
+            <if test="sendUserName != null  and sendUserName != ''"> and SEND_USER_NAME like concat('%', #{sendUserName}, '%')</if>
+            <if test="sendDate != null "> and date_format(SEND_DATE, '%Y-%m-%d') = date_format(#{sendDate}, '%Y-%m-%d') </if>
+            <if test="isAttac != null  and isAttac != ''"> and IS_ATTAC = #{isAttac}</if>
+            <if test="notifyTypes != null  and notifyTypes != ''"> and NOTIFY_TYPES = #{notifyTypes}</if>
+            <if test="status != null  and status != ''"> and STATUS = #{status}</if>
+            <if test="createBy != null  and createBy != ''"> and CREATE_BY = #{createBy}</if>
+            <if test="createTime != null "> and CREATE_TIME = #{createTime}</if>
+            <if test="updateBy != null  and updateBy != ''"> and UPDATE_BY = #{updateBy}</if>
+            <if test="updateTime != null "> and UPDATE_TIME = #{updateTime}</if>
+            <if test="note != null  and note != ''"> and NOTE = #{note}</if>
+            <if test="receiveUserCode != null  and receiveUserCode != ''"> and RECEIVE_USER_CODE = #{receiveUserCode}</if>
+            <if test="receiveUserName != null  and receiveUserName != ''"> and RECEIVE_USER_NAME like concat('%', #{receiveUserName}, '%')</if>
+            <if test="readStatus != null  and readStatus != ''"> and READ_STATUS = #{readStatus}</if>
+            <if test="readDate != null "> and READ_DATE = #{readDate}</if>
+            <if test="isStar != null  and isStar != ''"> and IS_STAR = #{isStar}</if>
+            <if test="note1 != null  and note1 != ''"> and NOTE1 = #{note1}</if>
+            <if test="note2 != null  and note2 != ''"> and NOTE2 = #{note2}</if>
+            <if test="note3 != null  and note3 != ''"> and NOTE3 = #{note3}</if>
+            <if test="note4 != null  and note4 != ''"> and NOTE4 = #{note4}</if>
+            <if test="note5 != null  and note5 != ''"> and NOTE5 = #{note5}</if>
+            <if test="note6 != null  and note6 != ''"> and NOTE6 = #{note6}</if>
+            <if test="note7 != null  and note7 != ''"> and NOTE7 = #{note7}</if>
+            <if test="note8 != null  and note8 != ''"> and NOTE8 = #{note8}</if>
+            <if test="note9 != null  and note9 != ''"> and NOTE9 = #{note9}</if>
+            <if test="note10 != null  and note10 != ''"> and NOTE10 = #{note10}</if>
+        </where>
+    </select>
+    
+    <select id="selectMsgById" parameterType="Long" resultMap="MsgResult">
+        <include refid="selectMsgVo"/>
+        where ID = #{id}
+    </select>
+
+    <update id="updateMsg" parameterType="MsgDomain">
+        update yh_msg_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="receiveUserCode != null">RECEIVE_USER_CODE = #{receiveUserCode},</if>
+            <if test="receiveUserName != null">RECEIVE_USER_NAME = #{receiveUserName},</if>
+            <if test="readStatus != null">READ_STATUS = #{readStatus},</if>
+            <if test="readDate != null">READ_DATE = #{readDate},</if>
+            <if test="isStar != null">IS_STAR = #{isStar},</if>
+        </trim>
+        where ID = #{id}
+    </update>
+
+    <delete id="deleteMsgById" parameterType="Long">
+        <!-- delete from yh_msg_inner where ID = #{id}; -->
+        delete from yh_msg_record where MSG_INNER_ID = #{id};
+    </delete>
+
+    <delete id="deleteYhMsgInnerByIds" parameterType="String">
+        <!--delete from yh_msg_inner where ID in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>; -->
+        delete from yh_msg_record where MSG_INNER_ID in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>;
+    </delete>
+</mapper>
